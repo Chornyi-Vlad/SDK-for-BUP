@@ -2,6 +2,7 @@ import logo from "./logo.svg";
 import "./App.css";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { useLocation } from "react-router-dom";
 
 function App() {
   const [isLoggedin, setIsLoggedin] = useState(false);
@@ -38,6 +39,12 @@ function App() {
       });
   };
 
+  // const params = URLSearchParams.get("code");
+  // console.log(params);
+  // получаем параметры строки запроса
+  // const [searchParams, setSearchParams] = useSearchParams();
+  const location = useLocation();
+  console.log(location);
   return (
     <div className="App">
       <header className="App-header">
