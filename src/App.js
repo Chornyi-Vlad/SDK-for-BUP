@@ -31,7 +31,7 @@ function App() {
   const getData = () => {
     axios
       .get(
-        "https://api.instagram.com/oauth/authorize?client_id=1888342354683903&redirect_uri=https://youtube.com/&scope=user_profile,user_media&response_type=code"
+        "https://api.instagram.com/oauth/authorize?client_id=1888342354683903&redirect_uri=https://socialsdk.herokuapp.com/&scope=user_profile,user_media&response_type=code"
       )
       .then((response) => {
         console.log(response);
@@ -51,7 +51,7 @@ function App() {
           data-auto-logout-link="false"
           data-use-continue-as="false"
         ></div>
-        <a href="https://api.instagram.com/oauth/authorize?client_id=1888342354683903&redirect_uri=https://youtube.com/&scope=user_profile,user_media&response_type=code">
+        <a href="https://api.instagram.com/oauth/authorize?client_id=1888342354683903&redirect_uri=https://socialsdk.herokuapp.com/&scope=user_profile,user_media&response_type=code">
           link
         </a>
         <button type="button" onClick={getData}>
