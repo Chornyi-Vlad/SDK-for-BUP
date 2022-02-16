@@ -17,9 +17,9 @@ const Auth = () => {
         grant_type: "authorization_code",
         redirect_uri: "https://socialsdk.herokuapp.com/auth/",
       },
-      headers: {
-        "Content-Type": "multipart/form-data",
-      },
+      //   headers: {
+      //     "Content-Type": "multipart/form-data",
+      //   },
     }).then((response) => console.log(response.data));
   };
 
