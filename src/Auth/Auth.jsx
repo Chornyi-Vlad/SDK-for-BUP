@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { useEffect } from "react";
-import { useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 const Auth = () => {
   const location = useLocation();
@@ -36,23 +36,23 @@ const Auth = () => {
     redirect_uri: "https://socialsdk.herokuapp.com/auth/",
   };
 
-  const boundary = String(Math.random()).slice(2);
-  const boundaryMiddle = "--" + boundary + "\r\n";
-  const boundaryLast = "--" + boundary + "--\r\n";
+  //   const boundary = String(Math.random()).slice(2);
+  //   const boundaryMiddle = "--" + boundary + "\r\n";
+  //   const boundaryLast = "--" + boundary + "--\r\n";
 
-  let body = ["\r\n"];
-  for (let key in data) {
-    // добавление поля
-    body.push(
-      'Content-Disposition: form-data; name="' +
-        key +
-        '"\r\n\r\n' +
-        data[key] +
-        "\r\n"
-    );
-  }
+  //   let body = ["\r\n"];
+  //   for (let key in data) {
+  //     // добавление поля
+  //     body.push(
+  //       'Content-Disposition: form-data; name="' +
+  //         key +
+  //         '"\r\n\r\n' +
+  //         data[key] +
+  //         "\r\n"
+  //     );
+  //   }
 
-  body = body.join(boundaryMiddle) + boundaryLast;
+  //   body = body.join(boundaryMiddle) + boundaryLast;
   const formData = new FormData();
   for (const key in data) {
     formData.set(key, data[key]);
@@ -75,6 +75,7 @@ const Auth = () => {
   return (
     <>
       <h2>Auth page</h2>
+      <Link to={"/"}>GO HOME</Link>
       <h1> {code}</h1>
       <button onClick={getToken} type="button">
         get token
