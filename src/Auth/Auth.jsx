@@ -7,7 +7,6 @@ const Auth = () => {
   const code = location.search.slice(6);
 
   useEffect(() => {
-    console.log(code);
     axios({
       method: "post",
       url: "https://api.instagram.com/oauth/access_token",
