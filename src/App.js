@@ -1,12 +1,11 @@
 import logo from "./logo.svg";
 import "./App.css";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import axios from "axios";
-import { useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
 
 function App() {
-  const [isLoggedin, setIsLoggedin] = useState(false);
-
+  const navigate = useNavigate();
   useEffect(() => {
     window.fbAsyncInit = () => {
       window.FB.init({
@@ -39,12 +38,6 @@ function App() {
       });
   };
 
-  // const params = URLSearchParams.get("code");
-  // console.log(params);
-  // получаем параметры строки запроса
-  // const [searchParams, setSearchParams] = useSearchParams();
-  const location = useLocation();
-  console.log(location);
   return (
     <div className="App">
       <header className="App-header">
@@ -61,9 +54,7 @@ function App() {
         <a href="https://api.instagram.com/oauth/authorize?client_id=1888342354683903&redirect_uri=https://socialsdk.herokuapp.com/&scope=user_profile,user_media&response_type=code">
           link
         </a>
-        <button type="button" onClick={getData}>
-          GOOOOOOO
-        </button>
+        <Link to={"/auth"}>GOOOOOOO</Link>
       </header>
     </div>
   );
