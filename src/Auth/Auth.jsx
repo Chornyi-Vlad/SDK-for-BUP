@@ -6,7 +6,7 @@ const Auth = () => {
   const location = useLocation();
   const code = location.search.slice(6);
 
-  useEffect(() => {
+  const getToken = () => {
     axios({
       method: "post",
       url: "https://api.instagram.com/oauth/access_token",
@@ -17,13 +17,19 @@ const Auth = () => {
         grant_type: "authorization_code",
         redirect_uri: "https://socialsdk.herokuapp.com/auth/",
       },
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
     }).then((response) => console.log(response.data));
-  }, []);
+  };
 
   return (
     <>
       <h2>Auth page</h2>
       <h1> {code}</h1>
+      <button onClick={getToken} type="button">
+        get token
+      </button>
     </>
   );
 };
