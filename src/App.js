@@ -1,11 +1,11 @@
 import logo from "./logo.svg";
 import "./App.css";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
 
 function App() {
-  const navigate = useNavigate();
+  const [auth, setAuth] = useState(false);
   useEffect(() => {
     window.fbAsyncInit = () => {
       window.FB.init({
@@ -27,7 +27,9 @@ function App() {
       fjs.parentNode.insertBefore(js, fjs);
     })(document, "script", "facebook-jssdk");
     window.FB.getLoginStatus(function (res) {
-      console.log(res);
+      if (res.status === "connected") {
+        setAuth(true);
+      }
     });
     window.FB.api("/me", function (res) {
       console.log(res);
@@ -43,20 +45,30 @@ function App() {
         console.log(response);
       });
   };
+  const facebookLogOut = () => {
+    window.FB.logout(function (res) {
+      console.log(res);
+      setAuth(false);
+    });
+  };
 
   return (
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
-        <div
-          className="fb-login-button"
-          data-width="100"
-          data-size="large"
-          data-button-type="continue_with"
-          data-layout="default"
-          data-auto-logout-link="false"
-          data-use-continue-as="false"
-        ></div>
+        {auth ? (
+          <div
+            className="fb-login-button"
+            data-width=""
+            data-size="large"
+            data-button-type="continue_with"
+            data-layout="default"
+            data-auto-logout-link="false"
+            data-use-continue-as="false"
+          ></div>
+        ) : (
+          <button onClick={facebookLogOut}>facebook LOGOUT</button>
+        )}
         <a href="https://api.instagram.com/oauth/authorize?client_id=1888342354683903&redirect_uri=https://socialsdk.herokuapp.com/auth/&scope=user_profile,user_media&response_type=code">
           GET MY INSTAGRAM CODE
         </a>
