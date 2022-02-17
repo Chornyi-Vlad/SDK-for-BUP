@@ -69,7 +69,7 @@ function App() {
           data-use-continue-as="false"
         ></div>
 
-        {!auth && <button onClick={facebookLogOut}>facebook LOGOUT</button>}
+        <button onClick={facebookLogOut}>facebook LOGOUT</button>
 
         <a href="https://api.instagram.com/oauth/authorize?client_id=1888342354683903&redirect_uri=https://socialsdk.herokuapp.com/auth/&scope=user_profile,user_media&response_type=code">
           GET MY INSTAGRAM CODE
