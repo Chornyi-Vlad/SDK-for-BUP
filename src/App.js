@@ -27,13 +27,15 @@ function App() {
       fjs.parentNode.insertBefore(js, fjs);
     })(document, "script", "facebook-jssdk");
     window.FB.getLoginStatus(function (res) {
+      console.log(res);
       if (res.status === "connected") {
+        console.log(res);
         setAuth(true);
       }
     });
-    window.FB.api("/me", function (res) {
-      console.log(res);
-    });
+    // window.FB.api("/me", function (res) {
+    //   console.log(res);
+    // });
   }, []);
 
   const getData = () => {
@@ -56,6 +58,7 @@ function App() {
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
+
         {auth ? (
           <div
             className="fb-login-button"
@@ -69,6 +72,7 @@ function App() {
         ) : (
           <button onClick={facebookLogOut}>facebook LOGOUT</button>
         )}
+
         <a href="https://api.instagram.com/oauth/authorize?client_id=1888342354683903&redirect_uri=https://socialsdk.herokuapp.com/auth/&scope=user_profile,user_media&response_type=code">
           GET MY INSTAGRAM CODE
         </a>
