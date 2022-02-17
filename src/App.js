@@ -59,7 +59,7 @@ function App() {
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
 
-        {auth ? (
+        {auth === true ? (
           <div
             className="fb-login-button"
             data-width=""
