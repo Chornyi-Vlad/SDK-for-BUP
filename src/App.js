@@ -59,17 +59,16 @@ function App() {
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
 
-        {auth && (
-          <div
-            className="fb-login-button"
-            data-width=""
-            data-size="large"
-            data-button-type="continue_with"
-            data-layout="default"
-            data-auto-logout-link="false"
-            data-use-continue-as="false"
-          ></div>
-        )}
+        <div
+          className="fb-login-button"
+          data-width=""
+          data-size="large"
+          data-button-type="continue_with"
+          data-layout="default"
+          data-auto-logout-link="false"
+          data-use-continue-as="false"
+        ></div>
+
         {!auth && <button onClick={facebookLogOut}>facebook LOGOUT</button>}
 
         <a href="https://api.instagram.com/oauth/authorize?client_id=1888342354683903&redirect_uri=https://socialsdk.herokuapp.com/auth/&scope=user_profile,user_media&response_type=code">
