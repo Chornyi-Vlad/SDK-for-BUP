@@ -26,6 +26,12 @@ function App() {
       js.src = "https://connect.facebook.net/en_US/sdk.js";
       fjs.parentNode.insertBefore(js, fjs);
     })(document, "script", "facebook-jssdk");
+    window.FB.getLoginStatus(function (res) {
+      console.log(res);
+    });
+    window.FB.api("/me", function (res) {
+      console.log(res);
+    });
   }, []);
 
   const getData = () => {
@@ -44,7 +50,7 @@ function App() {
         <img src={logo} className="App-logo" alt="logo" />
         <div
           className="fb-login-button"
-          data-width=""
+          data-width="100"
           data-size="large"
           data-button-type="continue_with"
           data-layout="default"
