@@ -60,8 +60,7 @@ function App() {
   };
   const facebookLogOut = () => {
     window.FB.logout(function (res) {
-      console.log(res);
-      setAuth(false);
+      setStatus("unknown");
     });
   };
 
