@@ -6,6 +6,7 @@ import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
 
 function App() {
   const [auth, setAuth] = useState(false);
+  const [status, setStatus] = useState("unknown");
   useEffect(() => {
     window.fbAsyncInit = () => {
       window.FB.init({
@@ -30,13 +31,23 @@ function App() {
       console.log(res);
       if (res.status === "connected") {
         console.log(res);
-        setAuth(true);
+
+        setStatus(res.status);
       }
     });
     // window.FB.api("/me", function (res) {
     //   console.log(res);
     // });
   }, []);
+
+  useEffect(() => {
+    if (status === "connected") {
+      setAuth(true);
+    }
+    if (status === "unknown") {
+      setAuth(false);
+    }
+  }, [status]);
 
   const getData = () => {
     axios
