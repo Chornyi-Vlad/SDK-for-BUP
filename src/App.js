@@ -1,19 +1,20 @@
+import React from "react";
+import GoogleLogin from "react-google-login";
 import logo from "./logo.svg";
 import "./App.css";
 import { useEffect, useState } from "react";
-import axios from "axios";
-import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
 
 function App() {
+  //***************************instagram/facebook******************************************/
   const [auth, setAuth] = useState(false);
   const [status, setStatus] = useState("unknown");
   useEffect(() => {
     window.fbAsyncInit = () => {
       window.FB.init({
-        appId: "470141627940051",
+        appId: "your APP-ID", //change it
         autoLogAppEvents: true,
         xfbml: true,
-        version: "v11.0",
+        version: "v11.0", //choose it
       });
     };
     (function (d, s, id) {
@@ -31,13 +32,9 @@ function App() {
       console.log(res);
       if (res.status === "connected") {
         console.log(res);
-
         setStatus(res.status);
       }
     });
-    // window.FB.api("/me", function (res) {
-    //   console.log(res);
-    // });
   }, []);
 
   useEffect(() => {
@@ -49,19 +46,39 @@ function App() {
     }
   }, [status]);
 
-  const getData = () => {
-    axios
-      .get(
-        "https://api.instagram.com/oauth/authorize?client_id=1888342354683903&redirect_uri=https://socialsdk.herokuapp.com/&scope=user_profile,user_media&response_type=code"
-      )
-      .then((response) => {
-        console.log(response);
-      });
-  };
   const facebookLogOut = () => {
     window.FB.logout(function (res) {
       setStatus("unknown");
     });
+  };
+  // *******************************************google/youtube*********************************************************************************************
+
+  const API_KEY = "Your API-KEY"; //change it
+
+  const [gapiReady, setGapiReady] = useState("false");
+
+  const loadYoutubeApi = () => {
+    const script = document.createElement("script");
+    script.src = "https://apis.google.com/js/client.js";
+
+    script.onload = () => {
+      window.gapi.load("client", () => {
+        window.gapi.client.setApiKey(API_KEY);
+        window.gapi.client.load("youtube", "v3", () => {
+          setGapiReady(true);
+        });
+      });
+    };
+
+    document.body.appendChild(script);
+  };
+
+  useEffect(() => {
+    loadYoutubeApi();
+  }, []);
+
+  const responseGoogle = (response) => {
+    console.log(response); //get google token
   };
 
   return (
@@ -84,6 +101,12 @@ function App() {
         <a href="https://api.instagram.com/oauth/authorize?client_id=1888342354683903&redirect_uri=https://socialsdk.herokuapp.com/auth/&scope=user_profile,user_media&response_type=code">
           GET MY INSTAGRAM CODE
         </a>
+        <GoogleLogin
+          clientId="216839396501-majm9prq4ajbruvebunnk19j9egjbroo.apps.googleusercontent.com"
+          buttonText="Google login"
+          onSuccess={responseGoogle}
+          onFailure={responseGoogle}
+        />
       </header>
     </div>
   );
